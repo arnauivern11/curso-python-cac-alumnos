@@ -1,0 +1,36 @@
+# Curso de Python — Colegio de Actuarios de Cataluña
+# Instalación: python -m venv .venv && .venv\Scripts\activate && pip install -r requirements.txt
+# Ver docs/guia_alumno_setup.md para el detalle paso a paso en Windows.
+
+# Núcleo científico / datos
+numpy==2.5.3
+pandas==2.3.3
+scipy==1.18.1
+
+# Visualización
+matplotlib==3.11.1
+seaborn==0.13.2
+
+# Machine learning
+scikit-learn==1.9.0
+
+# Bases de datos y APIs (Unidad 9)
+sqlmodel==0.0.42
+requests==2.34.2
+python-dotenv==1.2.3
+
+# Excel / IO
+openpyxl==3.1.5
+
+# Datos sintéticos (data/generators/)
+faker==40.38.0
+
+# Tests (Unidad 6)
+pytest==9.1.1
+
+# Entorno de notebooks
+notebook==7.6.2
+ipykernel==7.3.0
+
+# Higiene del repositorio
+nbstripout==0.9.1

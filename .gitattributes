@@ -1,0 +1,7 @@
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
+
+# Line endings the scripts need on each system
+*.sh text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf

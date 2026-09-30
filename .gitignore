@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+.venv_check/
+venv/
+.env
+.pytest_cache/
+*.db
+*.sqlite3
+.vscode/
+.idea/
+
+# Registro del instalador del entorno (instalar_entorno.ps1)
+instalacion.log

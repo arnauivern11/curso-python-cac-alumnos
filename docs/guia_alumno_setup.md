@@ -27,7 +27,7 @@ Los pasos 1-8 son para **Windows**; si usas un **Mac**, ve a [Si usas un Mac](#s
 
 ### Opción rápida: instalación automática
 
-1. Descarga la carpeta del curso y guárdala en Documentos (paso 4; si la recibes como zip, extráela).
+1. Descarga la carpeta del curso en Documentos desde https://github.com/arnauivern11/curso-python-cac-alumnos (paso 4: con `git clone` o como zip, que tendrás que extraer).
 2. Dentro de la carpeta, haz **doble clic en `instalar_entorno.bat`**. Si Windows muestra «Windows protegió su PC», pulsa **Más información → Ejecutar de todas formas**.
 3. El script instala lo que te falte (Python, Git, VS Code con sus extensiones, Claude Code y las librerías del curso) y termina con el checklist. Tarda entre 10 y 20 minutos. Si Windows te pide permiso para instalar algún programa, acepta.
 4. Si todo sale **OK**, continúa en el **paso 6** y el **paso 8**. Si algún paso sale **FALLA**, hazlo a mano con esta guía. El registro completo queda en `instalacion.log`.
@@ -68,10 +68,14 @@ Consulta `docs/cheatsheet_git.md` para los comandos del día a día.
 
 ## 4. El material del curso (≈ 5 min)
 
-Guarda la carpeta del curso en tus **Documentos**. Según cómo la recibas:
+El material está en **https://github.com/arnauivern11/curso-python-cac-alumnos**. Descárgalo en tus **Documentos** de una de estas dos formas:
 
-- **Como archivo .zip**: clic derecho → **Extraer todo** en Documentos. No trabajes dentro del zip sin extraerlo.
-- **Como repositorio de Git**: en una terminal, `cd $HOME\Documents` y después `git clone` seguido de la dirección del repositorio.
+- **Con Git (recomendado)**: así podrás recibir las novedades y las soluciones con `git pull`. Se crea la carpeta `curso-python-cac-alumnos`.
+  ```powershell
+  cd $HOME\Documents
+  git clone https://github.com/arnauivern11/curso-python-cac-alumnos.git
+  ```
+- **Como zip**: descarga [https://github.com/arnauivern11/curso-python-cac-alumnos/archive/refs/heads/main.zip](https://github.com/arnauivern11/curso-python-cac-alumnos/archive/refs/heads/main.zip) (o **Code → Download ZIP** en la página del repositorio), clic derecho → **Extraer todo** en Documentos. La carpeta se llama `curso-python-cac-alumnos-main`. No trabajes dentro del zip sin extraerlo.
 
 Ábrela en VS Code con **Archivo → Abrir carpeta**. Si pregunta si confías en los autores de la carpeta, responde **Sí**.
 
@@ -148,7 +152,7 @@ Necesitas **macOS 13 (Ventura) o posterior** (procesador Apple o Intel) y que tu
 
 **Opción rápida: instalación automática**
 
-1. Guarda la carpeta del curso en **Documentos** (si es un zip, haz doble clic para descomprimirla).
+1. Descarga la carpeta del curso en **Documentos** desde https://github.com/arnauivern11/curso-python-cac-alumnos: con `cd ~/Documents` y `git clone https://github.com/arnauivern11/curso-python-cac-alumnos.git`, o como [zip](https://github.com/arnauivern11/curso-python-cac-alumnos/archive/refs/heads/main.zip), que se descomprime con doble clic.
 2. Abre **Terminal** (`⌘ + Espacio`, escribe `Terminal`, Intro).
 3. Escribe `bash ` (con un espacio al final), **arrastra `instalar_entorno.sh`** desde la carpeta del curso a la ventana de Terminal y pulsa Intro.
 4. El script instala lo que falte: Homebrew, Python 3.13, Git, VS Code con sus extensiones, Claude Code y las librerías del curso (10-20 minutos). Te pedirá la contraseña del Mac (al escribirla no se ve nada, es normal). Si aparece una ventana para instalar las «herramientas de línea de comandos», acéptala y vuelve a ejecutar el script al terminar.

@@ -107,6 +107,8 @@ python -c "import pandas, numpy, scipy, sklearn, matplotlib, seaborn, sqlmodel; 
 
 > ⚠️ **Error típico**: `ModuleNotFoundError` al ejecutar una celda. El kernel no es `.venv`: cámbialo arriba a la derecha. Si no aparece en la lista, cierra y vuelve a abrir VS Code con la carpeta del curso.
 
+> ⚠️ **Error típico**: `.venv` aparece en la lista y desaparece enseguida. Regístralo como kernel con nombre propio, en la terminal de VS Code y dentro de la carpeta del curso: `.venv\Scripts\python -m ipykernel install --user --name curso --display-name "Curso Python"`. Después: **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. Solo hay que hacerlo una vez.
+
 **Alternativa: Jupyter Notebook en el navegador**
 
 Si VS Code te da problemas con los notebooks, en la terminal, dentro de la carpeta del curso y con `(.venv)` activado:
@@ -173,6 +175,7 @@ Necesitas **macOS 13 (Ventura) o posterior** (procesador Apple o Intel) y que tu
 | Lo que ves | Qué hacer |
 |---|---|
 | `zsh: command not found: claude` (o `brew`, `code`) | Cierra Terminal y abre una ventana nueva: la configuración está en `~/.zprofile`. |
+| `.venv` aparece en «Seleccionar kernel» y desaparece enseguida | En Terminal, dentro de la carpeta del curso: `.venv/bin/python -m ipykernel install --user --name curso --display-name "Curso Python"`; después **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. |
 | `xcrun: error: invalid active developer path` | Ejecuta `xcode-select --install`, acepta y vuelve a ejecutar el script. |
 | Homebrew dice que tu usuario no es administrador | Pide permisos, o instala a mano Python (python.org), VS Code (code.visualstudio.com) y Git (`xcode-select --install`). |
 | Aviso de macOS anterior a 13 | Actualiza en Ajustes del Sistema → General → Actualización de software: sin macOS 13, Claude Code no funciona. |
@@ -200,6 +203,7 @@ Con el entorno activado (`(.venv)` visible), cada comando debe responder sin err
 | `No matching distribution found for numpy==2.5.3` (o scipy) | El entorno se creó con Python 3.11 o anterior. Borra `.venv` y créalo con `py -3.13 -m venv .venv`. |
 | Errores de `SSL`, `proxy` o `timeout` en `pip install` o `git clone` | La red o la VPN de tu empresa bloquean la descarga. Desconecta la VPN, prueba otra red o consulta a IT. |
 | `ModuleNotFoundError` en el notebook | El kernel no es `.venv` (paso 6), o prueba con Jupyter Notebook en el navegador. |
+| `.venv` aparece en «Seleccionar kernel» y desaparece enseguida | `.venv\Scripts\python -m ipykernel install --user --name curso --display-name "Curso Python"` (en Mac, `.venv/bin/python -m ipykernel install --user --name curso --display-name "Curso Python"`) y después **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. |
 | `git` o `claude` no se reconocen tras instalarlos | Cierra todas las terminales y VS Code, y vuelve a abrirlos. |
 | `fatal: destination path ... already exists` | Ya habías descargado el curso: entra en esa carpeta con `cd`. |
 | `ImportError: DLL load failed` … «Una directiva de Control de aplicaciones bloqueó este archivo» | **Smart App Control** de Windows 11 bloquea las librerías recién instaladas. Prueba primero a repetir el checklist al cabo de unos minutos (`-SoloComprobar`): a veces el bloqueo desaparece solo. Si sigue, en un equipo de empresa, consulta a IT. En uno personal, puedes desactivarlo en Seguridad de Windows → Control de aplicaciones y navegador → Smart App Control (en muchas versiones no se puede volver a activar sin reinstalar Windows), o usar otro ordenador. |

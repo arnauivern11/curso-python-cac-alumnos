@@ -16,8 +16,8 @@ Los pasos 1-8 son para **Windows**; si usas un **Mac**, ve a [Si usas un Mac](#s
 
 | Herramienta | Para qué |
 |---|---|
-| **Visual Studio Code** (recomendado) | El editor principal del curso: abre los notebooks, los archivos `.py`, la terminal y Git en una sola ventana. Es gratuito. |
-| **Jupyter Notebook** (alternativa) | Los mismos notebooks en el navegador. Se instala solo con las librerías del curso (paso 5): úsalo si VS Code te da problemas. |
+| **Jupyter Notebook** (recomendado para los notebooks) | Abre los notebooks en el navegador con doble clic en `abrir_jupyter`. Se instala solo con las librerías del curso (paso 5) y ya usa el entorno del curso: no hay que elegir nada. |
+| **Visual Studio Code** | El editor para archivos `.py`, terminal y Git en una sola ventana. Lo usaremos sobre todo a partir del Día 6. También abre notebooks. |
 | **PyCharm** | Si ya lo usas y te sientes cómodo, puedes seguir con él. Las explicaciones del curso se harán con VS Code. |
 | **Anaconda** | **No hace falta.** El curso usa el Python de python.org con un entorno virtual y versiones fijadas. Si ya lo tienes, puede convivir, pero no uses «Anaconda Prompt» para el curso. |
 
@@ -97,27 +97,22 @@ python -c "import pandas, numpy, scipy, sklearn, matplotlib, seaborn, sqlmodel; 
 
 > ⚠️ **Error típico**: `No se puede cargar el archivo ...\Activate.ps1 porque la ejecución de scripts está deshabilitada en este sistema`. Ejecuta una vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, confirma con `S` y vuelve a activar el entorno.
 
-## 6. Probar un notebook (≈ 3 min)
+## 6. Abrir los notebooks (≈ 3 min)
 
-**En VS Code (recomendado)**
+**Con Jupyter Notebook (recomendado)**
 
-1. Abre `dia_01_entorno_e_ia/01_teoria_entorno_windows.ipynb`.
-2. Arriba a la derecha: **Seleccionar kernel** → **Entornos de Python** → **.venv**.
-3. Haz clic en la primera celda de código y pulsa `Mayús+Intro`. Debe ejecutarse y mostrar `[1]` a su izquierda.
+1. En la carpeta del curso, haz **doble clic en `abrir_jupyter.bat`** (en Mac: `bash abrir_jupyter.sh` en Terminal).
+2. Se abre una ventana negra y, en unos segundos, el navegador con las carpetas del curso. **Deja la ventana negra abierta** mientras trabajas.
+3. Entra en `dia_01_entorno_e_ia`, abre `01_teoria_entorno_windows.ipynb` y ejecuta la primera celda con `Mayús+Intro`. Debe mostrar `[1]` y el resultado. No hace falta elegir kernel: Jupyter ya usa el entorno del curso.
 
-> ⚠️ **Error típico**: `ModuleNotFoundError` al ejecutar una celda. El kernel no es `.venv`: cámbialo arriba a la derecha. Si no aparece en la lista, cierra y vuelve a abrir VS Code con la carpeta del curso.
+Para cerrar Jupyter, guarda los notebooks y cierra la ventana negra (en Mac, `Ctrl+C` dos veces). Jupyter guarda solo cada dos minutos.
 
-> ⚠️ **Error típico**: `.venv` aparece en la lista y desaparece enseguida. Regístralo como kernel con nombre propio, en la terminal de VS Code y dentro de la carpeta del curso: `.venv\Scripts\python -m ipykernel install --user --name curso --display-name "Curso Python"`. Después: **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. Solo hay que hacerlo una vez.
+**Con VS Code (alternativa; la usaremos en el Día 6)**
 
-**Alternativa: Jupyter Notebook en el navegador**
+1. **Archivo → Abrir carpeta** → la carpeta del curso, y abre el mismo notebook.
+2. Arriba a la derecha: **Seleccionar kernel** → **Entornos de Python** → **.venv**, y ejecuta la primera celda.
 
-Si VS Code te da problemas con los notebooks, en la terminal, dentro de la carpeta del curso y con `(.venv)` activado:
-
-```powershell
-jupyter notebook
-```
-
-Se abre el navegador con la lista de carpetas: entra en `dia_01_entorno_e_ia`, abre el notebook y ejecuta la primera celda con `Mayús+Intro`. La terminal debe quedarse abierta mientras trabajas; para cerrarlo, guarda el notebook y pulsa `Ctrl+C` en la terminal.
+> ⚠️ **Error típico**: en VS Code, `.venv` no aparece, o aparece y desaparece enseguida. Regístralo con nombre propio, en la terminal de VS Code y dentro de la carpeta del curso: `.venv\Scripts\python -m ipykernel install --user --name curso --display-name "Curso Python"`. Después: **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. O, sencillamente, usa Jupyter Notebook.
 
 ## 7. Claude Code (≈ 5 min)
 
@@ -145,7 +140,7 @@ No hace falta que inicies sesión todavía: veremos cómo usarlo en la primera s
 - **Dos pantallas, si puedes**: la videollamada en una y VS Code en la otra. Con una sola, divide la pantalla con `Windows + ←` y `Windows + →`.
 - **Letra de VS Code**: `Ctrl` + `+` para ampliarla y `Ctrl` + `-` para reducirla.
 - **Auriculares con micrófono**, para evitar el eco.
-- **Antes de cada sesión**: abre VS Code en la carpeta del curso y comprueba que el kernel es `.venv`. Si trabajas con el repositorio de Git, guarda tu trabajo (`git add .` y `git commit -m "Mi trabajo"`) y ejecuta `git pull` para recibir las novedades y las soluciones del día anterior.
+- **Antes de cada sesión**: si trabajas con el repositorio de Git, en una terminal en la carpeta del curso guarda tu trabajo (`git add .` y `git commit -m "Mi trabajo"`) y ejecuta `git pull` para recibir las novedades y las soluciones del día anterior. Después, abre Jupyter con `abrir_jupyter`.
 - **Cuando algo falle durante una sesión**: copia el mensaje de error completo **como texto** y pégalo en el chat. Es mucho más útil que una foto de la pantalla.
 
 ## Si usas un Mac
@@ -167,6 +162,7 @@ Necesitas **macOS 13 (Ventura) o posterior** (procesador Apple o Intel) y que tu
 | PowerShell | Terminal |
 | `python -m venv .venv` | `python3.13 -m venv .venv` |
 | `.venv\Scripts\Activate.ps1` | `source .venv/bin/activate` |
+| Doble clic en `abrir_jupyter.bat` | `bash abrir_jupyter.sh` en Terminal |
 | `Ctrl` en los atajos de VS Code | `⌘` (por ejemplo, `⌘+⇧+X` para Extensiones); ejecutar una celda sigue siendo `⇧+Intro` |
 | `irm https://claude.ai/install.ps1 \| iex` | `curl -fsSL https://claude.ai/install.sh \| bash` |
 
@@ -191,7 +187,7 @@ Con el entorno activado (`(.venv)` visible), cada comando debe responder sin err
 | `claude --version` | Un número de versión |
 | `jupyter --version` | Una lista de componentes con sus versiones |
 | `python -c "import pandas, numpy, scipy, sklearn, matplotlib, seaborn, sqlmodel; print('Todo OK')"` | `Todo OK` |
-| Primera celda de `dia_01_entorno_e_ia/01_teoria_entorno_windows.ipynb` | Se ejecuta con el kernel `.venv` |
+| Doble clic en `abrir_jupyter.bat` y primera celda de `dia_01_entorno_e_ia/01_teoria_entorno_windows.ipynb` | Se abre el navegador y la celda muestra `[1]` y su resultado |
 
 ## Si algo falla
 
@@ -202,7 +198,7 @@ Con el entorno activado (`(.venv)` visible), cada comando debe responder sin err
 | `la ejecución de scripts está deshabilitada en este sistema` | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` (paso 5). |
 | `No matching distribution found for numpy==2.5.3` (o scipy) | El entorno se creó con Python 3.11 o anterior. Borra `.venv` y créalo con `py -3.13 -m venv .venv`. |
 | Errores de `SSL`, `proxy` o `timeout` en `pip install` o `git clone` | La red o la VPN de tu empresa bloquean la descarga. Desconecta la VPN, prueba otra red o consulta a IT. |
-| `ModuleNotFoundError` en el notebook | El kernel no es `.venv` (paso 6), o prueba con Jupyter Notebook en el navegador. |
+| `ModuleNotFoundError` en el notebook | En VS Code, el kernel no es `.venv` (paso 6). Lo más sencillo: abre el notebook con `abrir_jupyter`. |
 | `.venv` aparece en «Seleccionar kernel» y desaparece enseguida | `.venv\Scripts\python -m ipykernel install --user --name curso --display-name "Curso Python"` (en Mac, `.venv/bin/python -m ipykernel install --user --name curso --display-name "Curso Python"`) y después **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. |
 | `git` o `claude` no se reconocen tras instalarlos | Cierra todas las terminales y VS Code, y vuelve a abrirlos. |
 | `fatal: destination path ... already exists` | Ya habías descargado el curso: entra en esa carpeta con `cd`. |

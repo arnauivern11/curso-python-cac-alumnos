@@ -312,7 +312,7 @@ checklist() {
     done
     echo ""
     if [ "$failed" -eq 0 ]; then
-        printf '%sTodo listo. Abre la carpeta del curso en VS Code y prueba un notebook.%s\n' "$C_OK" "$C_END"
+        printf '%sTodo listo. Para empezar: bash abrir_jupyter.sh (paso 6 de la guía).%s\n' "$C_OK" "$C_END"
         echo "Cierra esta ventana de Terminal y abre una nueva para que los cambios de PATH tengan efecto."
     else
         printf '%sHay pasos pendientes. Busca cada uno en la guía de instalación.%s\n' "$C_WARN" "$C_END"

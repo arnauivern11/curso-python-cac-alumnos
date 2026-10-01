@@ -62,10 +62,10 @@ Antes de cada sesión, abre VS Code en esta carpeta, guarda tu trabajo con un co
 y comprueba que el kernel es `.venv`. Si algo falla durante una sesión, pega el mensaje de error
 completo **como texto** en el chat.
 
-El editor recomendado es VS Code. Si tienes problemas con el kernel, `jupyter notebook` (con el
-entorno activado) abre los mismos notebooks en el navegador.
+Para abrir los notebooks: doble clic en `abrir_jupyter.bat` (en Mac, `bash abrir_jupyter.sh` en Terminal).
+Se abre Jupyter en el navegador, ya con el entorno del curso. VS Code lo usaremos sobre todo a partir del Día 6.
 
 1. Abre los notebooks de teoría en orden y ejecuta cada celda. En los bloques «Error típico»,
    intenta predecir qué va a pasar antes de ejecutar.
 2. Haz los ejercicios sin mirar las soluciones.
-3. Cuando algo no cuadre, usa **Kernel → Restart & Run All**.
+3. Cuando algo no cuadre, usa **Kernel → Restart Kernel and Run All Cells**.

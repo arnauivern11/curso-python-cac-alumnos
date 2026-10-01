@@ -266,7 +266,7 @@ function Test-Checklist {
     $Results | Format-Table -AutoSize | Out-String | Write-Host
     $failed = @($Results | Where-Object { $_.Estado -eq "FALLA" })
     if ($failed.Count -eq 0) {
-        Write-Host "Todo listo. Abre la carpeta del curso en VS Code y prueba un notebook (paso 6 de la guía)." -ForegroundColor Green
+        Write-Host "Todo listo. Para empezar, haz doble clic en abrir_jupyter.bat (paso 6 de la guía)." -ForegroundColor Green
     } else {
         Write-Host "Hay pasos pendientes. Busca cada uno en la guía de instalación." -ForegroundColor Yellow
         Write-Host "El registro completo está en: $LogFile" -ForegroundColor Yellow

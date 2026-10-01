@@ -178,19 +178,59 @@ function Install-VSCode {
     }
 }
 
+function Get-ClaudeInstaller {
+    # Download the official installer as text and check it really is a PowerShell script
+    # before running it. Company proxies, VPNs or blocked networks sometimes return an HTML
+    # page instead, and running that gives confusing "syntax errors" ("El operador '<'...").
+    $response = Invoke-WebRequest -Uri "https://claude.ai/install.ps1" -UseBasicParsing
+    $content = $response.Content
+    # Served as application/octet-stream: Windows PowerShell 5.1 may hand back raw bytes.
+    if ($content -is [byte[]]) { $content = [System.Text.Encoding]::UTF8.GetString($content) }
+    $content = "$content".TrimStart([char]0xFEFF)
+    if ($content -match '^\s*<' -or $content -notmatch 'claude') {
+        return @{ Ok = $false; Reason = "la red ha devuelto una página web en lugar del instalador" }
+    }
+    $parseErrors = $null
+    [void][System.Management.Automation.Language.Parser]::ParseInput($content, [ref]$null, [ref]$parseErrors)
+    if ($parseErrors.Count -gt 0) {
+        return @{ Ok = $false; Reason = "el instalador descargado no es válido ($($parseErrors[0].Message))" }
+    }
+    $path = Join-Path $env:TEMP "claude-install-$PID.ps1"
+    Set-Content -Path $path -Value $content -Encoding UTF8
+    return @{ Ok = $true; Path = $path }
+}
+
 function Install-Claude {
     Write-Step "4/5  Claude Code"
     if (-not (Find-Claude)) {
-        Write-Host "    Ejecutando el instalador oficial (claude.ai/install.ps1)..."
-        # Run the official installer in a child process so nothing it does can end this script.
-        & powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://claude.ai/install.ps1 | iex" | Out-Host
+        # Older Windows 10 builds do not enable TLS 1.2 by default.
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        Write-Host "    Descargando el instalador oficial (claude.ai/install.ps1)..."
+        $installer = $null
+        try { $installer = Get-ClaudeInstaller }
+        catch { Write-Warn "No se ha podido descargar el instalador: $($_.Exception.Message)" }
+        if ($installer -and $installer.Ok) {
+            # Run it from a file, in a child process, so nothing it does can end this script.
+            & powershell -NoProfile -ExecutionPolicy Bypass -File $installer.Path | Out-Host
+            Remove-Item $installer.Path -Force -ErrorAction SilentlyContinue
+        } elseif ($installer) {
+            Write-Warn "No se ejecuta el instalador de Claude Code: $($installer.Reason)."
+            Write-Warn "Suele pasar con la VPN o el proxy de una empresa."
+        }
         Update-SessionPath
         $bin = Join-Path $env:USERPROFILE ".local\bin"
         if (Test-Path $bin) { $env:Path = "$env:Path;$bin" }
+        if (-not (Find-Claude)) {
+            Write-Host "    Probando la otra vía oficial, winget (Anthropic.ClaudeCode)..."
+            Invoke-Winget "Anthropic.ClaudeCode" "Claude Code"
+        }
     }
     $claude = Find-Claude
     if ($claude) { Write-Ok "Claude Code $(& $claude --version)" }
-    else { Write-Warn "No se ha podido instalar Claude Code. Sigue el paso 7 de la guía." }
+    else {
+        Write-Warn "No se ha podido instalar Claude Code. No hace falta para empezar: lo veremos en las sesiones."
+        Write-Warn "Si usas un ordenador o una red de empresa, prueba más tarde desde otra red (paso 7 de la guía)."
+    }
 }
 
 function Install-Venv([string]$Python) {

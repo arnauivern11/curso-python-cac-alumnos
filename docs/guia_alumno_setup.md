@@ -172,6 +172,7 @@ Necesitas **macOS 13 (Ventura) o posterior** (procesador Apple o Intel) y que tu
 |---|---|
 | `zsh: command not found: claude` (o `brew`, `code`) | Cierra Terminal y abre una ventana nueva: la configuración está en `~/.zprofile`. |
 | `.venv` aparece en «Seleccionar kernel» y desaparece enseguida | En Terminal, dentro de la carpeta del curso: `.venv/bin/python -m ipykernel install --user --name curso --display-name "Curso Python"`; después **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. |
+| Al instalar Claude Code: `syntax error near unexpected token '<'` | La red ha devuelto una página web en lugar del instalador. El script lo detecta y prueba con Homebrew; si no, vuelve a ejecutarlo más tarde desde otra red. |
 | `xcrun: error: invalid active developer path` | Ejecuta `xcode-select --install`, acepta y vuelve a ejecutar el script. |
 | Homebrew dice que tu usuario no es administrador | Pide permisos, o instala a mano Python (python.org), VS Code (code.visualstudio.com) y Git (`xcode-select --install`). |
 | Aviso de macOS anterior a 13 | Actualiza en Ajustes del Sistema → General → Actualización de software: sin macOS 13, Claude Code no funciona. |
@@ -202,6 +203,7 @@ Con el entorno activado (`(.venv)` visible), cada comando debe responder sin err
 | `.venv` aparece en «Seleccionar kernel» y desaparece enseguida | `.venv\Scripts\python -m ipykernel install --user --name curso --display-name "Curso Python"` (en Mac, `.venv/bin/python -m ipykernel install --user --name curso --display-name "Curso Python"`) y después **Seleccionar otro kernel… → Jupyter Kernel… → «Curso Python»**. |
 | `git` o `claude` no se reconocen tras instalarlos | Cierra todas las terminales y VS Code, y vuelve a abrirlos. |
 | `fatal: destination path ... already exists` | Ya habías descargado el curso: entra en esa carpeta con `cd`. |
+| Al instalar Claude Code: «El operador '<' está reservado para uso futuro» o «Token inesperado» | La red ha devuelto una página web en lugar del instalador (suele ser la VPN o el proxy de una empresa). El instalador lo detecta y prueba con winget; si no, vuelve a ejecutarlo más tarde desde otra red. Para empezar el curso no hace falta. |
 | `ImportError: DLL load failed` … «Una directiva de Control de aplicaciones bloqueó este archivo» | **Smart App Control** de Windows 11 bloquea las librerías recién instaladas. Prueba primero a repetir el checklist al cabo de unos minutos (`-SoloComprobar`): a veces el bloqueo desaparece solo. Si sigue, en un equipo de empresa, consulta a IT. En uno personal, puedes desactivarlo en Seguridad de Windows → Control de aplicaciones y navegador → Smart App Control (en muchas versiones no se puede volver a activar sin reinstalar Windows), o usar otro ordenador. |
 
 Si no consigues terminarlo, no pasa nada: en la primera sesión veremos la instalación paso a paso, y tendrás hasta la segunda para dejarlo listo. Apunta en qué paso te quedaste y copia el texto del error.

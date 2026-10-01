@@ -223,8 +223,25 @@ install_vscode() {
 install_claude() {
     step "5/6  Claude Code"
     if [ -z "$(find_claude)" ]; then
-        echo "    Ejecutando el instalador oficial (claude.ai/install.sh)..."
-        curl -fsSL https://claude.ai/install.sh | bash
+        # Download first and check it is a shell script: company proxies, VPNs or blocked
+        # networks sometimes return an HTML page, and piping that into bash gives
+        # "syntax error near unexpected token '<'".
+        echo "    Descargando el instalador oficial (claude.ai/install.sh)..."
+        local tmp
+        tmp="$(mktemp "${TMPDIR:-/tmp}/claude-install.XXXXXX")"
+        if ! curl -fsSL https://claude.ai/install.sh -o "$tmp"; then
+            warn "No se ha podido descargar el instalador de Claude Code (¿sin conexión o red bloqueada?)."
+        elif head -n 1 "$tmp" | grep -q '^#!' && bash -n "$tmp" 2>/dev/null; then
+            bash "$tmp"
+        else
+            warn "No se ejecuta el instalador de Claude Code: la red ha devuelto una página web en lugar del instalador."
+            warn "Suele pasar con la VPN o el proxy de una empresa."
+        fi
+        rm -f "$tmp"
+        if [ -z "$(find_claude)" ] && [ -n "${BREW:-}" ]; then
+            echo "    Probando la otra vía oficial, Homebrew (claude-code)..."
+            "$BREW" install --cask claude-code
+        fi
     fi
     # The native installer puts claude in ~/.local/bin, which is not on PATH by default.
     case ":$PATH:" in
@@ -238,7 +255,8 @@ install_claude() {
     if [ -n "$claude" ]; then
         ok "Claude Code $("$claude" --version 2>/dev/null)"
     else
-        warn "No se ha podido instalar Claude Code. Sigue el paso de Claude Code de la guía."
+        warn "No se ha podido instalar Claude Code. No hace falta para empezar: lo veremos en las sesiones."
+        warn "Si usas un ordenador o una red de empresa, prueba más tarde desde otra red."
     fi
 }
 
